@@ -177,6 +177,10 @@ def page(title, description, url, content, home=False):
 <meta property="og:description" content="{ESC(description, quote=True)}">
 <meta property="og:url" content="{ESC(url, quote=True)}">
 <link rel="alternate" type="application/rss+xml" title="Abraham Kuri's blog" href="/feed.xml">
+<link rel="icon" href="/favicon.ico" sizes="32x32">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<meta name="theme-color" content="#1a1b26">
 <link rel="stylesheet" href="/style.css">
 <script src="/site.js" defer></script>
 </head>
@@ -235,9 +239,12 @@ def build_files(posts):
     files['feed.xml'] = ET.tostring(rss, encoding='unicode', xml_declaration=True) + '\n'
     files['CNAME'] = 'blog.kurenn.dev'
     files['.nojekyll'] = ''
-    for asset in ('style.css', 'site.js'):
+    for asset in ('style.css', 'site.js', 'favicon.svg'):
         files[asset] = (ROOT / 'templates' / asset).read_text(encoding='utf-8')
-    return {name: value.encode('utf-8') for name, value in files.items()}
+    out = {name: value.encode('utf-8') for name, value in files.items()}
+    for asset in ('favicon.ico', 'apple-touch-icon.png'):
+        out[asset] = (ROOT / 'templates' / asset).read_bytes()
+    return out
 
 
 def main():
