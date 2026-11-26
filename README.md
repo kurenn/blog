@@ -14,7 +14,7 @@ summary: One sentence describing the post.
 Your post goes here.
 ```
 
-The date must match the filename and slugs must be unique. Run `python3 -I build.py` to preview locally (it writes `docs/`, which is not committed). Commit only the post. On every push to `main`, `.github/workflows/pages.yml` runs the same build and deploys `docs/` to GitHub Pages at `blog.kurenn.dev`; pull requests only build, so a broken post fails its PR, not the site.
+The date must match the filename and slugs must be unique. Run `python3 -I build.py` to preview locally (it writes `docs/`, which is not committed). Commit only the post. A post dated in the future can be merged early: it stays hidden until a daily scheduled build (08:10 Monterrey) on or after its date publishes it. Preview a future post with `python3 -I build.py --today YYYY-MM-DD`. On every push to `main`, `.github/workflows/pages.yml` runs the same build and deploys `docs/` to GitHub Pages at `blog.kurenn.dev`; pull requests only build, so a broken post fails its PR, not the site.
 
 ## Markdown subset
 

@@ -13,6 +13,9 @@ import xml.etree.ElementTree as ET
 
 ROOT = Path(__file__).resolve().parent
 DOCS = ROOT / 'docs'
+# Posts dated after today (Monterrey time, UTC-6 all year) stay unpublished until that day's
+# scheduled build, so several posts can be merged at once and still come out on their dates.
+SITE_TZ = dt.timezone(dt.timedelta(hours=-6))
 BASE = 'https://blog.kurenn.dev'
 ESC = html.escape
 NAME = re.compile(r'^(\d{4}-\d{2}-\d{2})-([a-z0-9]+(?:-[a-z0-9]+)*)\.md$')
@@ -240,9 +243,15 @@ def build_files(posts):
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--check', action='store_true', help='compare generated files without writing')
+    parser.add_argument('--today', type=dt.date.fromisoformat, help='publish as of this date (YYYY-MM-DD), for previews')
     args = parser.parse_args()
+    today = args.today or dt.datetime.now(SITE_TZ).date()
     try:
-        expected = build_files(load_posts())
+        posts = load_posts()
+        for p in posts:
+            if p['date_obj'] > today:
+                print(f"scheduled, not published yet: {p['date']} {p['slug']}", file=sys.stderr)
+        expected = build_files([p for p in posts if p['date_obj'] <= today])
         existing = {p.relative_to(DOCS).as_posix(): p for p in DOCS.rglob('*') if p.is_file()} if DOCS.exists() else {}
         differences = sorted(name for name in set(expected) | set(existing)
                              if name not in expected or name not in existing or existing[name].read_bytes() != expected[name])
