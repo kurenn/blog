@@ -14,7 +14,7 @@ summary: One sentence describing the post.
 Your post goes here.
 ```
 
-The date must match the filename and slugs must be unique. Run `python3 -I build.py`, then commit `posts/` and the generated `docs/` together. Use `python3 -I build.py --check` to check whether the committed output is current. GitHub Pages serves `main:/docs` as static files, with the CNAME `blog.kurenn.dev`; Jekyll is disabled.
+The date must match the filename and slugs must be unique. Run `python3 -I build.py` to preview locally (it writes `docs/`, which is not committed). Commit only the post. On every push to `main`, `.github/workflows/pages.yml` runs the same build and deploys `docs/` to GitHub Pages at `blog.kurenn.dev`; pull requests only build, so a broken post fails its PR, not the site.
 
 ## Markdown subset
 
