@@ -1,0 +1,60 @@
+:root {
+  color-scheme: dark;
+  --ground: #1a1b26;
+  --ink: #c0caf5;
+  --text: #a9b1d6;
+  --dim: #565f89;
+  --muted: #414868;
+  --blue: #7aa2f7;
+  --violet: #bb9af7;
+  --green: #9ece6a;
+  --red: #f7768e;
+  --sel: #292e42;
+}
+* { box-sizing: border-box; }
+html, body { overflow-x: hidden; }
+body {
+  background: var(--ground);
+  color: var(--text);
+  font-family: ui-monospace, "JetBrainsMono Nerd Font", "JetBrains Mono", "SF Mono", SFMono-Regular, "Cascadia Code", Menlo, Consolas, "Liberation Mono", monospace;
+  font-size: 15px;
+  line-height: 1.8;
+  margin: 0;
+  padding: clamp(2.5rem, 9vw, 6rem) clamp(1.1rem, 5vw, 3rem) 5rem;
+  -webkit-font-smoothing: antialiased;
+}
+::selection { background: var(--sel); color: var(--ink); }
+main { max-width: 44rem; margin: 0 auto; display: flex; flex-direction: column; gap: 2.4rem; }
+#px { position: fixed; inset: 0; width: 100%; height: 100%; z-index: -1; pointer-events: none; }
+@media (max-width: 900px) { #px { display: none; } }
+.fit { width: 100%; }
+pre.fitted { margin: 0; white-space: pre; font-size: 16px; }
+pre.logo { line-height: 1.05; font-weight: 700; color: var(--blue); background: linear-gradient(90deg, var(--blue), var(--violet)); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
+pre.logo .s { -webkit-text-fill-color: var(--muted); }
+pre.logo .s2 { -webkit-text-fill-color: var(--dim); }
+a { color: var(--blue); text-underline-offset: .2em; }
+a:hover { color: var(--violet); }
+a:focus-visible { outline: 2px solid var(--blue); outline-offset: 4px; }
+nav { display: flex; flex-wrap: wrap; gap: 1.5rem; }
+nav a { text-decoration: none; border-bottom: 1px solid transparent; }
+nav a:hover, nav a:focus-visible { border-bottom-color: var(--blue); }
+nav .b { color: var(--dim); }
+.site-name { color: var(--ink); text-decoration: none; font-weight: bold; }
+.tile { border: 2px solid var(--blue); padding: 1rem 1.2rem; }
+.post-list { display: flex; flex-direction: column; gap: 1.5rem; }
+.post-card h2 { margin: .25rem 0; font-size: 1.25rem; }
+.post-card p { margin: 0; }
+h1, h2, h3 { color: var(--ink); line-height: 1.35; }
+h1 { margin: 0 0 .35rem; font-size: 2rem; }
+.meta { color: var(--text); font-size: .9rem; }
+.prose { margin-top: 2rem; overflow-wrap: anywhere; }
+.prose p, .prose ul, .prose ol, .prose blockquote, .prose pre { margin: 1.2rem 0; }
+.prose h2, .prose h3 { margin: 2rem 0 .7rem; }
+.prose ul, .prose ol { padding-left: 1.8rem; }
+.prose blockquote { border-left: 2px solid var(--violet); padding: .1rem 1rem; color: var(--ink); }
+.prose code { background: var(--sel); color: var(--ink); padding: .1em .25em; }
+.prose pre { background: var(--sel); border: 1px solid var(--muted); padding: 1rem; overflow-x: auto; max-width: 100%; }
+.prose pre code { background: none; padding: 0; white-space: pre; overflow-wrap: normal; }
+.post-nav { border-top: 1px solid var(--muted); padding-top: 1rem; }
+footer { color: var(--text); font-size: .82rem; }
+@media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation: none !important; transition: none !important; } }
