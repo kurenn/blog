@@ -7,6 +7,9 @@ on:
     branches: [main]
   pull_request:
   workflow_dispatch:
+  # Daily rebuild at 08:10 Monterrey (14:10 UTC) publishes posts whose date has arrived.
+  schedule:
+    - cron: "10 14 * * *"
 
 permissions:
   contents: read
